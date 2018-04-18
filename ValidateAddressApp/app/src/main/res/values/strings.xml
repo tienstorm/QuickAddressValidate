@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Quick Address Validate</string>
+    <string name="address">Address</string>
+    <string name="zip_code">Zip Code</string>
+    <string name="city">City</string>
+    <string name="state">State</string>
+    <string name="validate">Validate</string>
+    <string name="result">Result</string>
 </resources>

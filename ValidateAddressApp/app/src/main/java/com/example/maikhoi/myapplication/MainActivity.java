@@ -1,8 +1,11 @@
 package com.example.maikhoi.myapplication;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private Button submit;
     private Gson gson;
     private String addressInput, zipInput, cityInput, stateInput;
+    private Toast toast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,19 +54,27 @@ public class MainActivity extends AppCompatActivity {
                 stateInput = stateEditText.getText().toString();
 
                 if (addressInput.matches("")) {
-                    Toast.makeText(getApplicationContext(), "You did not enter an address", Toast.LENGTH_SHORT).show();
+                    toast = Toast.makeText(getApplicationContext(), "You did not enter an address", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
+                    toast.show();
                     return;
                 }
                 else if(zipInput.matches("")){
-                    Toast.makeText(getApplicationContext(), "You did not enter a zip code", Toast.LENGTH_SHORT).show();
+                    toast = Toast.makeText(getApplicationContext(), "You did not enter a zip code", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
+                    toast.show();
                     return;
                 }
                 else if(cityInput.matches("")){
-                    Toast.makeText(getApplicationContext(), "You did not enter a city", Toast.LENGTH_SHORT).show();
+                    toast = Toast.makeText(getApplicationContext(), "You did not enter a city", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
+                    toast.show();
                     return;
                 }
                 else if(stateInput.matches("")){
-                    Toast.makeText(getApplicationContext(), "You did not enter a state", Toast.LENGTH_SHORT).show();
+                    toast = Toast.makeText(getApplicationContext(), "You did not enter a state", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
+                    toast.show();
                     return;
                 }
                 ENDPOINT = new StringBuilder().append("http://apilayer.net/api/validate?access_key=20549b7e96811406c840caedf769e804").append("&address1=").append(addressInput).append("&postal_code=")
@@ -84,8 +96,10 @@ public class MainActivity extends AppCompatActivity {
             Log.i("INFO",response);
             Address address = gson.fromJson(response,Address.class);
             if(address.validation_status.matches("valid")){
+                result.setTextColor(Color.GREEN);
                 result.setText("Address is valid");
             }else{
+                result.setTextColor(Color.RED);
                 result.setText("Address is not valid");
             }
         }

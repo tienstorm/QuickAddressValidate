@@ -10,26 +10,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none">
-    <!-- LinearLayout Inside ScrollView -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="center_horizontal"
-        >
-
-
-    <LinearLayout
-        android:id="@+id/firstLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal"
-        android:gravity="center_horizontal"
-        android:weightSum="2">
-
-    <!-- place one TextView and one EditText inside layout using weight property -->
-
+        android:gravity="center_horizontal">
 
     <EditText
         android:id="@+id/editTextAddress"
@@ -44,17 +29,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Address" />
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:id="@+id/secondLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal"
-        android:gravity="center_horizontal"
-        android:weightSum="2">
 
     <EditText
         android:id="@+id/editTextZip"
@@ -69,16 +43,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextAddress"
         tools:text="ZipCode" />
-    </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/thirdLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal"
-        android:gravity="center_horizontal"
-        android:weightSum="2">
     <EditText
         android:id="@+id/editTextCity"
         android:layout_width="wrap_content"
@@ -92,16 +57,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextZip"
         tools:text="City" />
-    </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/fourthLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal"
-        android:gravity="center_horizontal"
-        android:weightSum="2">
     <EditText
         android:id="@+id/editTextState"
         android:layout_width="wrap_content"
@@ -115,7 +71,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextCity"
         tools:text="State" />
-    </LinearLayout>
+
 
     <Button
         android:id="@+id/submit"
@@ -127,26 +83,18 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextState" />
-    <LinearLayout
-        android:id="@+id/fifthLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal"
-        android:gravity="center_horizontal"
-        android:weightSum="2">
+
     <TextView
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="40dp"
         android:text="@string/result"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextState" />
-    </LinearLayout>
     </LinearLayout>
     </ScrollView>
 </android.support.constraint.ConstraintLayout>

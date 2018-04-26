@@ -1,5 +1,7 @@
 package com.example.maikhoi.myapplication;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -7,11 +9,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -77,8 +79,8 @@ public class MainActivity extends AppCompatActivity {
                     toast.show();
                     return;
                 }
-                ENDPOINT = new StringBuilder().append("http://apilayer.net/api/validate?access_key=20549b7e96811406c840caedf769e804").append("&address1=").append(addressInput).append("&postal_code=")
-                        .append(zipInput).append("&locality=").append(cityInput).append("&country_code=").append("US").append("&region=").append(stateInput).toString();
+                ENDPOINT = new StringBuilder().append("https://us-street.api.smartystreets.com/street-address?auth-id=9e67ba70-9f50-b45a-2d0e-5b94f786c803&auth-token=weW759b91nUH1KyjpUCG").append("&street=").append(addressInput).append("&city=")
+                        .append(cityInput).append("&state=").append(stateInput).append("&zipcode=").append(zipInput).toString();
                 fetchAddress(ENDPOINT);
             }
         });
@@ -93,15 +95,27 @@ public class MainActivity extends AppCompatActivity {
     private final Response.Listener<String> onLoaded  = new Response.Listener<String>(){
         @Override
         public void onResponse(String response){
+
             Log.i("INFO",response);
-            Address address = gson.fromJson(response,Address.class);
-            if(address.validation_status.matches("valid")){
+
+
+            if(!response.equalsIgnoreCase("[]")){
+                Resp[] address = gson.fromJson(response, Resp[].class);
                 result.setTextColor(Color.GREEN);
-                result.setText("Address is valid");
+                result.setText("Valid Address:\n" + address[0].components.primary_number + " " +  address[0].components.street_name + " " +  address[0].components.street_suffix + "\n" +
+                        address[0].components.city_name + "\n" +
+                        address[0].components.state_abbreviation + "\n" +
+                        address[0].components.zipcode + "\n");
             }else{
                 result.setTextColor(Color.RED);
                 result.setText("Address is not valid");
             }
+
+            InputMethodManager inputManager = (InputMethodManager)
+                    getSystemService(Context.INPUT_METHOD_SERVICE);
+
+            inputManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),
+                    InputMethodManager.HIDE_NOT_ALWAYS);
         }
     };
     private final Response.ErrorListener onError = new Response.ErrorListener() {
@@ -110,5 +124,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"Oops, Something went wrong",Toast.LENGTH_SHORT).show();
         }
     };
+
+
 
 }
